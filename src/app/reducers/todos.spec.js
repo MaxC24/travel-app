@@ -7,7 +7,7 @@ describe('todos reducer', () => {
       todos(undefined, {})
     ).toEqual([
       {
-        text: 'Use Redux',
+        text: 'Use Yeoman',
         completed: false,
         id: 0
       }
