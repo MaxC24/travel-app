@@ -12,13 +12,45 @@ const dest = join(root, 'dist');
 const NODE_ENV = process.env.NODE_ENV;
 const isDev = NODE_ENV === 'development';
 
+//hjs-webpack is a module that helps configure webpack
 const getConfig = require('hjs-webpack');
+
+//dynamic naming scheme for the css modules:
+const cssModulesNames = `${isDev ? '[path]__[name]__[local]__' : ''}[hash:base64:5`;
+
+const matchCssLoaders = /(^|!)(css-loader)($|!)/;
+
+const findLoader = (loaders, match) => {
+	const found = loaders.filter(l => l && l.loader.match(match));
+	return found ? found[0] : null;
+}
 
 var config = getConfig({
 	isDev: isDev,
 	in: join(src, 'app.js'),
 	out: dest,
 	clearBeforeBuild: true
+});
+
+//existing css loader
+console.log(config.module.loaders);
+const cssloader = findLoader(config.module.loaders, matchCssLoaders);
+
+const newloader = Object.assign({}, cssloader, {
+	test: /\.module\.css$/,
+	include: [src],
+	loader: cssloader.loader
+		.replace(matchCssLoaders,
+			`$1$2?modules&localIdentName=${cssModulesNames}$3`)
+});
+config.module.loaders.push(newloader);
+cssloader.test = new RegExp(`[^module]${cssloader.test.source}`);
+cssloader.loader = newloader.loader;
+
+config.module.loaders.push({
+	test: /\.css$/,
+	include: [modules],
+	loader: 'style!css'
 });
 
 config.postcss = [].concat([
