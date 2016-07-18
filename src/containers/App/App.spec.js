@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import { shallow } form 'enzyme'
+import { shallow } from 'enzyme'
 
 import App from './App'
 import styles from './styles.module.css'
