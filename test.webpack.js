@@ -1,7 +1,7 @@
 require('babel-polyfill');
 
 var chai = require('chai');
-var chaiEnzyme = reauire('chai-enzyme');
+var chaiEnzyme = require('chai-enzyme');
 
 chai.use(chaiEnzyme())
 
