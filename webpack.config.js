@@ -51,6 +51,16 @@ var config = getConfig({
 	clearBeforeBuild: true
 });
 
+//add a webpack root to be both node_modules/ and src/
+
+config.resolve.root = [src, modules]
+config.resolve.alias = {
+	'css': join(src, 'styles'),
+	'containers': join(src, 'containers'),
+	'components': join(src, 'components'),
+	'utils': join(src, 'utils')
+}
+
 //add ENV plugin the in the webpack config object
 
 config.plugins = [
