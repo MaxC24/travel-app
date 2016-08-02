@@ -2,6 +2,27 @@ import React, { Component } from 'react';
 
 class Inputs extends Component {
 
+	constructor(props){
+		super(props);
+		this.state = {
+			location: '',
+			dates: '',
+			budget: ''
+		}
+	}
+
+	getLocation(e) {
+		this.setState({location: e.target.value});
+	}
+
+	getDates(e) {
+		this.setState({dates: e.target.value});
+	}
+
+	getBudget(e) {
+		this.setState({budget: e.target.value});
+	}
+
 	findDestination() {
 		return alert('You pressed me');
 	}
@@ -10,12 +31,12 @@ class Inputs extends Component {
 		return (
 			<div>
 				<h3>Location</h3>
-				<input />
-				<h3>dates</h3>
-				<input />
+				<input onChange={this.getLocation.bind(this)} value={this.state.location}/>
+				<h3>Dates</h3>
+				<input onChange={this.getDates.bind(this)} value={this.state.dates}/>
 				<h3>Budget</h3>
-				<input />
-				<button onClick={ this.findDestination.bind(this) } >Submit</button>
+				<input onChange={this.getBudget.bind(this)} value={this.state.budget} />
+				<button onClick={ this.findDestination.bind(this)} >Submit</button>
 			</div>
 		);
 	}
