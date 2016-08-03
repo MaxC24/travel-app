@@ -8,7 +8,7 @@ class Inputs extends Component {
 			location: '',
 			dates: '',
 			budget: ''
-		}
+		};
 	}
 
 	getLocation(e) {
@@ -24,7 +24,7 @@ class Inputs extends Component {
 	}
 
 	findDestination() {
-		return alert('You pressed me');
+		this.props.find(this.state.location);
 	}
 
 	render() {
@@ -36,7 +36,7 @@ class Inputs extends Component {
 				<input onChange={this.getDates.bind(this)} value={this.state.dates}/>
 				<h3>Budget</h3>
 				<input onChange={this.getBudget.bind(this)} value={this.state.budget} />
-				<button onClick={ this.findDestination.bind(this)} >Submit</button>
+				<button onClick={ this.findDestination.bind(this) } >Find Destination</button>
 			</div>
 		);
 	}

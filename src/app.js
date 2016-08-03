@@ -4,6 +4,18 @@ import './App.css';
 import Inputs from './components/inputs'
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      result:''
+    };
+  }
+
+  findDestination(something) {
+    this.setState({result: something});
+  }
+
   render() {
     return (
       <div className="App">
@@ -11,7 +23,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <Inputs />
+        <Inputs find={this.findDestination.bind(this)} />
+        <div className="result">{ this.state.result }</div>
       </div>
     );
   }
