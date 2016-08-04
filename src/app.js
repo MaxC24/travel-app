@@ -11,8 +11,8 @@ class App extends Component {
     };
   }
 
-  findDestination(something) {
-    this.setState({result: something});
+  findDestination(details) {
+    this.setState({result: details});
   }
 
   render() {
