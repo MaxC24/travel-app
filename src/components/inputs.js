@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Calendar from 'react-input-calendar';
+import './inputs.style.css';
+
 
 class Inputs extends Component {
 
@@ -6,7 +9,7 @@ class Inputs extends Component {
 		super(props);
 		this.state = {
 			location: '',
-			dates: '',
+			dates: new Date(),
 			budget: ''
 		};
 	}
@@ -15,8 +18,8 @@ class Inputs extends Component {
 		this.setState({location: e.target.value});
 	}
 
-	getDates(e) {
-		this.setState({dates: e.target.value});
+	getDates(date) {
+		this.setState({dates: date});
 	}
 
 	getBudget(e) {
@@ -24,19 +27,19 @@ class Inputs extends Component {
 	}
 
 	findDestination() {
-		this.props.find(this.state.location);
+		this.props.find(this.state.location + " " + this.state.dates + ' ' + this.state.budget);
 	}
 
 	render() {
 		return (
 			<div>
 				<h3>Location</h3>
-				<input onChange={this.getLocation.bind(this)} value={this.state.location}/>
+				<input className='input' onChange={this.getLocation.bind(this)} value={this.state.location}/>
 				<h3>Dates</h3>
-				<input onChange={this.getDates.bind(this)} value={this.state.dates}/>
+				<Calendar className='input' format='DD/MM/YYYY' date={ this.state.dates } onChange={ this.getDates.bind(this) } />
 				<h3>Budget</h3>
-				<input onChange={this.getBudget.bind(this)} value={this.state.budget} />
-				<button onClick={ this.findDestination.bind(this) } >Find Destination</button>
+				<input  className='input' onChange={this.getBudget.bind(this)} value={this.state.budget} />
+				<button className='but' onClick={ this.findDestination.bind(this) } >Find Destination</button>
 			</div>
 		);
 	}
