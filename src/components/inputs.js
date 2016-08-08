@@ -20,8 +20,7 @@ class Inputs extends Component {
 
 	getDatesFrom(date) {
 		this.setState({dates: this.state.dates.map( (day, index) => {
-			if(index === 0) return date
-			else return day;
+			return date;
 		})});
 	}
 
